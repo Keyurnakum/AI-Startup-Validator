@@ -1,0 +1,24 @@
+{
+  "name": "ai-startup-validator",
+  "version": "1.0.0",
+  "description": "An AI-powered platform that validates startup ideas using market analysis, SWOT analysis, competitor research, AI scoring, and growth recommendations.",
+  "private": true,
+  "scripts": {
+    "server:start": "npm --prefix server run start",
+    "server:test": "npm --prefix server run test",
+    "client:dev": "npm --prefix client run dev",
+    "client:build": "npm --prefix client run build",
+    "client:lint": "npm --prefix client run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keyurnakum/AI-Startup-Validator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keyurnakum/AI-Startup-Validator/issues"
+  },
+  "homepage": "https://github.com/Keyurnakum/AI-Startup-Validator#readme"
+}
