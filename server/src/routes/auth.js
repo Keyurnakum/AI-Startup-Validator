@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { users } = require('../storage/memoryStore');
 const { isMongoConnected } = require('../config/db');
+const { authLimiter } = require('../middleware/rateLimit');
 
 const router = express.Router();
 
@@ -11,7 +12,7 @@ function normalizeEmail(email) {
   return String(email || '').trim().toLowerCase();
 }
 
-router.post('/register', async (req, res) => {
+router.post('/register', authLimiter, async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password || password.length < 6) {
@@ -45,7 +46,7 @@ router.post('/register', async (req, res) => {
   return res.status(201).json({ token, user: { id: userId, name, email: normalizedEmail } });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
   const normalizedEmail = normalizeEmail(email);
   const usingMongo = isMongoConnected();

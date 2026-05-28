@@ -18,7 +18,7 @@ describe('idea validation routes', () => {
 
   test('validates startup idea and returns analysis sections', async () => {
     const token = await getToken();
-    const authHeaderValue = ['Be', 'arer '].join('') + token;
+    const authHeaderValue = 'Bearer ' + token;
 
     const response = await request(app)
       .post('/api/ideas/validate')
@@ -41,7 +41,7 @@ describe('idea validation routes', () => {
 
   test('returns dashboard metrics for authenticated user', async () => {
     const token = await getToken();
-    const authHeaderValue = ['Be', 'arer '].join('') + token;
+    const authHeaderValue = 'Bearer ' + token;
 
     await request(app)
       .post('/api/ideas/validate')

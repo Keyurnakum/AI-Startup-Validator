@@ -72,7 +72,7 @@ function Dashboard({ auth, onLogout }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const headers = useMemo(() => ({ Authorization: ['Be', 'arer '].join('') + auth.token }), [auth.token]);
+  const headers = useMemo(() => ({ Authorization: 'Bearer ' + auth.token }), [auth.token]);
 
   async function submitIdea(event) {
     event.preventDefault();

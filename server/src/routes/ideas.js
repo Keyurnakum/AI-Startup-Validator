@@ -3,11 +3,12 @@ const IdeaValidation = require('../models/IdeaValidation');
 const { ideas } = require('../storage/memoryStore');
 const { isMongoConnected } = require('../config/db');
 const { authenticate } = require('../middleware/auth');
+const { apiLimiter } = require('../middleware/rateLimit');
 const { analyzeIdea } = require('../services/analysisService');
 
 const router = express.Router();
 
-router.get('/', authenticate, async (req, res) => {
+router.get('/', apiLimiter, authenticate, async (req, res) => {
   if (isMongoConnected()) {
     const records = await IdeaValidation.find({ userId: req.user.id }).sort({ createdAt: -1 }).lean();
     return res.json(records);
@@ -20,7 +21,7 @@ router.get('/', authenticate, async (req, res) => {
   return res.json(records);
 });
 
-router.post('/validate', authenticate, async (req, res) => {
+router.post('/validate', apiLimiter, authenticate, async (req, res) => {
   const { startupName, idea, industry, targetAudience } = req.body;
 
   if (!startupName || !idea) {
